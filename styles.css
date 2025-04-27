@@ -226,20 +226,62 @@ main {
 }
 
 .story-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.story-intro {
+    font-size: 1.3rem;
+    color: var(--red);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Caveat', cursive;
 }
 
 .story-section {
-    background-color: var(--black);
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 2rem;
-    border: 2px solid var(--red);
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--red);
 }
 
 .story-section h3 {
     color: var(--red);
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
+}
+
+.story-section p {
+    margin-bottom: 1rem;
+}
+
+.story-section.education {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-left: 5px solid var(--red);
+}
+
+.story-section.hidden-life {
+    background-color: rgba(128, 0, 32, 0.1);
+    border: 1px solid var(--red);
+    border-left: 5px solid var(--red);
+}
+
+.story-section.premonition {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--red);
+    font-style: italic;
+}
+
+.story-section p:last-child {
+    margin-bottom: 0;
 }
 
 .traits-list {
