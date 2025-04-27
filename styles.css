@@ -580,4 +580,106 @@ footer {
     .member-photo {
         height: 200px;
     }
+}
+
+.relations-grid {
+    display: grid;
+    gap: 3rem;
+    padding: 1rem;
+}
+
+.relations-group {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.group-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--red);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.relations-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.relation-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.relation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(128, 0, 32, 0.3);
+}
+
+.relation-card.enemy {
+    border-color: #800020;
+    background-color: rgba(128, 0, 32, 0.1);
+}
+
+.relation-photo {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.relation-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.relation-card:hover .relation-photo img {
+    transform: scale(1.05);
+}
+
+.relation-info {
+    padding: 1.5rem;
+}
+
+.relation-name {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--red);
+    margin-bottom: 0.5rem;
+}
+
+.relation-status {
+    font-size: 0.9rem;
+    color: #808080;
+    margin-bottom: 1rem;
+}
+
+.relation-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.enemies .relation-card {
+    border-color: #800020;
+}
+
+.enemies .relation-name {
+    color: #800020;
+}
+
+@media (max-width: 768px) {
+    .relations-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .relation-photo {
+        height: 200px;
+    }
 } 
