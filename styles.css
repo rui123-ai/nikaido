@@ -144,11 +144,32 @@ main {
 }
 
 .content-section {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-image: url('images/WALL.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
     padding: 4rem 2rem;
     border-bottom: 1px solid var(--red);
     margin-bottom: 2rem;
     border-radius: 10px;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.content-section > * {
+    position: relative;
+    z-index: 1;
 }
 
 .section-title {
