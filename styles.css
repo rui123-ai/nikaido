@@ -148,11 +148,7 @@ main {
 }
 
 .content-section {
-    background-image: url('images/WALL.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 4rem 2rem;
     border-bottom: 1px solid var(--red);
     margin-bottom: 2rem;
