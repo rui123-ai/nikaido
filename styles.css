@@ -174,6 +174,7 @@ main {
     background-color: var(--black);
     padding: 2rem;
     border: 2px solid var(--red);
+    border-radius: 10px;
 }
 
 .profile-card h3 {
@@ -357,9 +358,32 @@ footer {
     font-size: 1.5rem;
 }
 
+.profile-info {
+    margin-top: 1rem;
+}
+
+.birth-profile {
+    color: var(--red);
+    margin: 1.5rem 0 1rem 0;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+}
+
+.profile-details-list {
+    list-style: none;
+}
+
+.profile-details-list li {
+    margin-bottom: 0.8rem;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--red);
+}
+
 .japanese-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--red);
 }
 
 .profile-list {
