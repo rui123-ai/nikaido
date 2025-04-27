@@ -450,4 +450,60 @@ footer {
 
 .profile-image:hover {
     transform: scale(1.02);
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    color: var(--red);
+    font-weight: bold;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 2px solid var(--red);
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.personality-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.personality-text p {
+    margin-bottom: 1.5rem;
+}
+
+.family-intro {
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    padding: 1rem;
+    border-left: 3px solid var(--red);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.haru-event {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    border: 1px solid var(--red);
+}
+
+.self-reflection {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--red);
+}
+
+.babymetal-fan {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: rgba(128, 0, 32, 0.2);
+    border-radius: 10px;
+    border: 2px solid var(--red);
+}
+
+.babymetal-fan p {
+    font-weight: bold;
+    color: var(--white);
 } 
