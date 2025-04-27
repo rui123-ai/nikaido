@@ -228,11 +228,33 @@ main {
 .story-content {
     max-width: 900px;
     margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    border-left: 3px solid var(--red);
 }
 
 .story-text {
     font-size: 1.1rem;
     line-height: 1.8;
+}
+
+.story-text p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.story-text p:first-child {
+    font-size: 1.3rem;
+    color: var(--red);
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+}
+
+.story-text p:last-child {
+    font-style: italic;
+    margin-bottom: 0;
 }
 
 .story-intro {
