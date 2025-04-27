@@ -396,15 +396,24 @@ footer {
 }
 
 .photo-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    background-color: var(--red);
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
+    width: 100px;
+    height: 100px;
     margin: 0 auto 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--red);
+    box-shadow: 0 0 10px rgba(128, 0, 32, 0.5);
+}
+
+.icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-icon:hover .icon-image {
+    transform: scale(1.1);
 }
 
 .character-intro {
