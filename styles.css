@@ -51,30 +51,15 @@ body {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-image: url('images/WALL.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: rgba(0, 0, 0, 0.85);
     padding: 2rem 1rem;
     border-right: 3px solid var(--red);
     z-index: 1000;
-    position: relative;
-}
-
-.side-menu::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: -1;
+    box-shadow: 2px 0 10px rgba(128, 0, 32, 0.3);
 }
 
 .side-menu ul {
     list-style: none;
-    position: relative;
-    z-index: 1;
 }
 
 .side-menu a {
@@ -85,12 +70,14 @@ body {
     margin: 0.5rem 0;
     position: relative;
     transition: all 0.3s ease;
+    border-left: 2px solid transparent;
 }
 
 .side-menu a:hover {
     color: var(--red);
     transform: translateX(5px);
-    background-color: rgba(0, 0, 0, 0.5);
+    border-left: 2px solid var(--red);
+    background-color: rgba(128, 0, 32, 0.1);
 }
 
 .side-menu a::before {
@@ -100,7 +87,7 @@ body {
     top: 0;
     height: 100%;
     width: 0;
-    background-color: var(--red);
+    background-color: rgba(128, 0, 32, 0.1);
     transition: width 0.3s ease;
     z-index: -1;
 }
