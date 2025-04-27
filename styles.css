@@ -413,11 +413,32 @@ footer {
     padding: 1.5rem;
     background-color: rgba(0, 0, 0, 0.3);
     border-left: 3px solid var(--red);
-    margin: 1rem 0;
+    margin-bottom: 0;
     border-radius: 0 10px 10px 0;
 }
 
 .character-intro .highlight {
     color: var(--red);
     font-weight: bold;
+}
+
+.character-image {
+    margin-top: 1rem;
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.profile-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
 } 
