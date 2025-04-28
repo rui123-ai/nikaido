@@ -515,8 +515,8 @@
             }, 50);
 
             // Audio setup
-            const mainSong = new Audio('music/like-a-fire.mp3');
-            const ryujiSong = new Audio('music/ryuji.mp3');
+            const mainSong = new Audio('musicas/like-a-fire.mp3');
+            const ryujiSong = new Audio('musicas/ryuji.mp3');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
             const volumeValue = document.querySelector('.volume-value');
@@ -543,7 +543,9 @@
                 currentSong = newSong;
                 currentSong.volume = volumeSlider.value / 100;
                 if (wasPlaying) {
-                    currentSong.play();
+                    currentSong.play().catch(function(error) {
+                        console.log("Erro ao tocar música:", error);
+                    });
                 }
                 updatePlayerControls(!currentSong.paused);
             }
@@ -552,7 +554,9 @@
             function startPlaying() {
                 if (!hasInteracted) {
                     hasInteracted = true;
-                    currentSong.play();
+                    currentSong.play().catch(function(error) {
+                        console.log("Erro ao tocar música:", error);
+                    });
                     updatePlayerControls(true);
                 }
             }
@@ -581,7 +585,9 @@
             // Play/Pause button functionality
             playPauseBtn.addEventListener('click', function() {
                 if (currentSong.paused) {
-                    currentSong.play();
+                    currentSong.play().catch(function(error) {
+                        console.log("Erro ao tocar música:", error);
+                    });
                 } else {
                     currentSong.pause();
                 }
@@ -598,12 +604,16 @@
             // Loop songs when they end
             mainSong.addEventListener('ended', function() {
                 this.currentTime = 0;
-                this.play();
+                this.play().catch(function(error) {
+                    console.log("Erro ao reiniciar música:", error);
+                });
             });
 
             ryujiSong.addEventListener('ended', function() {
                 this.currentTime = 0;
-                this.play();
+                this.play().catch(function(error) {
+                    console.log("Erro ao reiniciar música:", error);
+                });
             });
 
             // Handle tab visibility
@@ -612,9 +622,20 @@
                     if (document.hidden) {
                         currentSong.pause();
                     } else {
-                        currentSong.play();
+                        currentSong.play().catch(function(error) {
+                            console.log("Erro ao retomar música:", error);
+                        });
                     }
                 }
+            });
+
+            // Adicionar tratamento de erro para carregamento das músicas
+            mainSong.addEventListener('error', function(e) {
+                console.log("Erro ao carregar like-a-fire.mp3:", e);
+            });
+
+            ryujiSong.addEventListener('error', function(e) {
+                console.log("Erro ao carregar ryuji.mp3:", e);
             });
         });
     </script>
