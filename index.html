@@ -16,9 +16,23 @@
             <li><a href="#familia">Minha Família</a></li>
             <li><a href="#historia">Minha História</a></li>
             <li><a href="#personalidade">Minha Personalidade</a></li>
-            <li><a href="#galeria">Galeria</a></li>
         </ul>
     </nav>
+
+    <div class="audio-player">
+        <div class="player-controls">
+            <button id="playPauseBtn" class="player-btn">
+                <span class="play-icon">▶</span>
+                <span class="pause-icon" style="display:none;">⏸</span>
+            </button>
+            <div class="volume-control">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                <span class="volume-value">50%</span>
+            </div>
+            <p class="now-playing">Now Playing: BabyMetal - Megitsune</p>
+        </div>
+    </div>
 
     <main>
         <section id="inicio" class="hero">
@@ -434,21 +448,6 @@
             </div>
         </section>
 
-        <section id="galeria" class="content-section">
-            <h2 class="section-title">Galeria</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="placeholder1.jpg" alt="Nikaido com armaduras">
-                </div>
-                <div class="gallery-item">
-                    <img src="placeholder2.jpg" alt="Roxanne em missão secreta">
-                </div>
-                <div class="gallery-item">
-                    <img src="placeholder3.jpg" alt="Close dos olhos">
-                </div>
-            </div>
-        </section>
-
         <footer>
             <div class="social-links">
                 <a href="#" class="social-icon">★</a>
@@ -458,5 +457,43 @@
             <p class="footer-quote">"Alguns forjam coroas. Eu forjo caos. Bem-vindo ao meu império."</p>
         </footer>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = new Audio('music/megitsune.mp3');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeValue = document.querySelector('.volume-value');
+            const playIcon = document.querySelector('.play-icon');
+            const pauseIcon = document.querySelector('.pause-icon');
+
+            // Set initial volume
+            audio.volume = 0.5;
+
+            playPauseBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'inline';
+                } else {
+                    audio.pause();
+                    playIcon.style.display = 'inline';
+                    pauseIcon.style.display = 'none';
+                }
+            });
+
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                audio.volume = volume;
+                volumeValue.textContent = this.value + '%';
+            });
+
+            // Loop the audio when it ends
+            audio.addEventListener('ended', function() {
+                audio.currentTime = 0;
+                audio.play();
+            });
+        });
+    </script>
 </body>
 </html> 
