@@ -621,14 +621,23 @@
             });
 
             // Handle tab visibility
+            let wasPlaying = false;
+            let audioPosition = 0;
+            
             document.addEventListener('visibilitychange', function() {
-                if (!currentSong.paused) {
-                    if (document.hidden) {
-                        currentSong.pause();
-                    } else {
+                if (document.hidden) {
+                    // Store the current state before pausing
+                    wasPlaying = !currentSong.paused;
+                    audioPosition = currentSong.currentTime;
+                    currentSong.pause();
+                } else {
+                    // Restore the previous state when returning
+                    if (wasPlaying) {
+                        currentSong.currentTime = audioPosition;
                         currentSong.play().catch(function(error) {
                             console.log("Erro ao retomar música:", error);
                         });
+                        updatePlayerControls(true);
                     }
                 }
             });
