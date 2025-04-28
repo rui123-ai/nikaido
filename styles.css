@@ -776,17 +776,22 @@ footer {
 .appearance-content {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.appearance-grid {
     display: grid;
+    grid-template-columns: 400px 1fr;
     gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .appearance-main-image {
     width: 100%;
-    margin-bottom: 2rem;
     border-radius: 10px;
     overflow: hidden;
     border: 3px solid var(--red);
     box-shadow: 0 0 20px rgba(128, 0, 32, 0.3);
+    height: fit-content;
 }
 
 .appearance-main-image img {
@@ -800,11 +805,17 @@ footer {
     transform: scale(1.02);
 }
 
+.appearance-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .style-description {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 2rem;
     border-radius: 10px;
     border-left: 3px solid var(--red);
+    height: 100%;
 }
 
 .style-description > p {
@@ -835,6 +846,27 @@ footer {
     margin-bottom: 0.5rem;
     padding-left: 1rem;
     border-left: 2px solid var(--red);
+}
+
+@media (max-width: 992px) {
+    .appearance-grid {
+        grid-template-columns: 300px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .appearance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .appearance-main-image {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .style-description {
+        padding: 1rem;
+    }
 }
 
 .wishes-section {
