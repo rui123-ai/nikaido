@@ -8,7 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="glitch-container">
+            <img src="images/WALLPAPER.png" alt="Loading" class="glitch-img">
+            <div class="glitch-effect"></div>
+        </div>
+        <div class="loading-text">
+            <span class="hack-text">INICIANDO SISTEMA...</span>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="stars-background"></div>
+    
     <nav class="side-menu">
         <ul>
             <li><a href="#inicio">Início</a></li>
@@ -39,8 +53,7 @@
             <div class="hero-content">
                 <h1>Fragmentos de Mim</h1>
                 <h2>O Diário de Hoshizora Nikaido</h2>
-                <p class="quote">"Entre os cacos do que eu fui, eu forjei quem sou."</p>
-                <button class="cta-button">Comece a Jornada</button>
+                <p class="quote">"Vou me tornar a melhor, fique vendo."</p>
             </div>
         </section>
 
@@ -460,6 +473,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen animation
+            const loadingScreen = document.getElementById('loading-screen');
+            const progress = document.querySelector('.progress');
+            const hackText = document.querySelector('.hack-text');
+            
+            const hackTexts = [
+                "INICIANDO SISTEMA...",
+                "CARREGANDO DADOS...",
+                "VERIFICANDO SEGURANÇA...",
+                "ESTABELECENDO CONEXÃO...",
+                "ACESSANDO ARQUIVOS...",
+                "DECODIFICANDO...",
+                "PREPARANDO INTERFACE..."
+            ];
+            
+            let currentText = 0;
+            const textInterval = setInterval(() => {
+                hackText.textContent = hackTexts[currentText];
+                currentText = (currentText + 1) % hackTexts.length;
+            }, 800);
+
+            let width = 0;
+            const loadingInterval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(loadingInterval);
+                    clearInterval(textInterval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 1000);
+                    }, 500);
+                } else {
+                    width++;
+                    progress.style.width = width + '%';
+                }
+            }, 50);
+
+            // Audio player functionality
             const audio = new Audio('music/megitsune.mp3');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
@@ -467,7 +519,6 @@
             const playIcon = document.querySelector('.play-icon');
             const pauseIcon = document.querySelector('.pause-icon');
 
-            // Set initial volume
             audio.volume = 0.5;
 
             playPauseBtn.addEventListener('click', function() {
@@ -488,7 +539,6 @@
                 volumeValue.textContent = this.value + '%';
             });
 
-            // Loop the audio when it ends
             audio.addEventListener('ended', function() {
                 audio.currentTime = 0;
                 audio.play();
