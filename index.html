@@ -45,6 +45,7 @@
                 <span class="volume-value">50%</span>
             </div>
         </div>
+        <button id="returnToMainSong" class="return-song-btn" style="display: none;">Like a Fire</button>
     </div>
 
     <main>
@@ -304,7 +305,7 @@
                             </div>
 
                             <div class="relation-card">
-                                <div class="relation-photo">
+                                <div class="relation-photo" id="ryujiPhoto">
                                     <img src="images/ryuji.jpg" alt="Ryuji Ohkubo">
                                 </div>
                                 <div class="relation-info">
@@ -510,79 +511,100 @@
                 }
             }, 50);
 
-            // Audio player functionality
-            const audio = new Audio('music/like_a_fire.mp3');
+            // Audio setup
+            const mainSong = new Audio('music/like-a-fire.mp3');
+            const ryujiSong = new Audio('music/megitsune.mp3');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
             const volumeValue = document.querySelector('.volume-value');
             const playIcon = document.querySelector('.play-icon');
             const pauseIcon = document.querySelector('.pause-icon');
+            const returnButton = document.getElementById('returnToMainSong');
+            const ryujiPhoto = document.getElementById('ryujiPhoto');
 
-            // Set initial volume
-            audio.volume = 0.5;
+            let currentSong = mainSong;
+            let hasInteracted = false;
+
+            // Function to update player controls
+            function updatePlayerControls(isPlaying) {
+                playIcon.style.display = isPlaying ? 'none' : 'inline';
+                pauseIcon.style.display = isPlaying ? 'inline' : 'none';
+            }
+
+            // Function to stop current song and play new one
+            function switchSong(newSong) {
+                const wasPlaying = !currentSong.paused;
+                currentSong.pause();
+                currentSong.currentTime = 0;
+                currentSong = newSong;
+                currentSong.volume = volumeSlider.value / 100;
+                if (wasPlaying) {
+                    currentSong.play();
+                }
+                updatePlayerControls(!currentSong.paused);
+            }
 
             // Function to start playing
             function startPlaying() {
-                audio.play();
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'inline';
+                if (!hasInteracted) {
+                    hasInteracted = true;
+                    currentSong.play();
+                    updatePlayerControls(true);
+                }
             }
 
-            // Play on first interaction
-            let hasInteracted = false;
-            document.addEventListener('click', function() {
-                if (!hasInteracted) {
-                    startPlaying();
-                    hasInteracted = true;
-                }
-            }, { once: true });
+            // Play on any interaction
+            document.addEventListener('click', startPlaying, { once: true });
+            document.addEventListener('keydown', startPlaying, { once: true });
+            document.addEventListener('scroll', startPlaying, { once: true });
+
+            // Ryuji photo click handler
+            ryujiPhoto.addEventListener('click', function() {
+                switchSong(ryujiSong);
+                returnButton.style.display = 'block';
+            });
+
+            // Return to main song button
+            returnButton.addEventListener('click', function() {
+                switchSong(mainSong);
+                returnButton.style.display = 'none';
+            });
 
             // Play/Pause button functionality
             playPauseBtn.addEventListener('click', function() {
-                if (audio.paused) {
-                    startPlaying();
+                if (currentSong.paused) {
+                    currentSong.play();
                 } else {
-                    audio.pause();
-                    playIcon.style.display = 'inline';
-                    pauseIcon.style.display = 'none';
+                    currentSong.pause();
                 }
+                updatePlayerControls(!currentSong.paused);
             });
 
             // Volume control
             volumeSlider.addEventListener('input', function() {
                 const volume = this.value / 100;
-                audio.volume = volume;
+                currentSong.volume = volume;
                 volumeValue.textContent = this.value + '%';
             });
 
-            // Loop the audio when it ends
-            audio.addEventListener('ended', function() {
-                audio.currentTime = 0;
-                audio.play();
+            // Loop songs when they end
+            mainSong.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
             });
 
-            // Additional interaction triggers
-            document.addEventListener('keydown', function() {
-                if (!hasInteracted) {
-                    startPlaying();
-                    hasInteracted = true;
-                }
-            }, { once: true });
+            ryujiSong.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
 
-            document.addEventListener('scroll', function() {
-                if (!hasInteracted) {
-                    startPlaying();
-                    hasInteracted = true;
-                }
-            }, { once: true });
-
-            // Prevent audio interruption when changing tabs
+            // Handle tab visibility
             document.addEventListener('visibilitychange', function() {
-                if (!audio.paused) {
+                if (!currentSong.paused) {
                     if (document.hidden) {
-                        audio.pause();
+                        currentSong.pause();
                     } else {
-                        audio.play();
+                        currentSong.play();
                     }
                 }
             });

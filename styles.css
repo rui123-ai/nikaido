@@ -1181,4 +1181,53 @@ footer {
     #volumeSlider {
         width: 60px;
     }
+}
+
+.return-song-btn {
+    background: none;
+    border: 2px solid var(--red);
+    color: var(--red);
+    padding: 5px 10px;
+    margin-top: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    display: none;
+    width: 100%;
+}
+
+.return-song-btn:hover {
+    background-color: var(--red);
+    color: var(--white);
+    transform: scale(1.05);
+}
+
+#ryujiPhoto {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+#ryujiPhoto::after {
+    content: '♪';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--red);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#ryujiPhoto:hover::after {
+    opacity: 1;
+}
+
+#ryujiPhoto img {
+    transition: transform 0.3s ease;
+}
+
+#ryujiPhoto:hover img {
+    transform: scale(1.05);
 } 
