@@ -309,7 +309,10 @@
                                     <img src="images/ryuji.jpg" alt="Ryuji Ohkubo">
                                 </div>
                                 <div class="relation-info">
-                                    <h4 class="relation-name">Ryuji Ohkubo</h4>
+                                    <div class="name-container">
+                                        <h4 class="relation-name">Ryuji Ohkubo</h4>
+                                        <button class="warning-btn" id="dangerButton">Não aperte</button>
+                                    </div>
                                     <p class="relation-status">Crush</p>
                                     <p class="relation-description">Eu acho ele bonitinho, mas quem é a explosiva sou eu, ironicamente.</p>
                                 </div>
@@ -513,7 +516,7 @@
 
             // Audio setup
             const mainSong = new Audio('music/like-a-fire.mp3');
-            const ryujiSong = new Audio('music/megitsune.mp3');
+            const ryujiSong = new Audio('music/ryuji.mp3');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
             const volumeValue = document.querySelector('.volume-value');
@@ -521,6 +524,7 @@
             const pauseIcon = document.querySelector('.pause-icon');
             const returnButton = document.getElementById('returnToMainSong');
             const ryujiPhoto = document.getElementById('ryujiPhoto');
+            const dangerButton = document.getElementById('dangerButton');
 
             let currentSong = mainSong;
             let hasInteracted = false;
@@ -558,16 +562,20 @@
             document.addEventListener('keydown', startPlaying, { once: true });
             document.addEventListener('scroll', startPlaying, { once: true });
 
-            // Ryuji photo click handler
-            ryujiPhoto.addEventListener('click', function() {
+            // Warning button click handler
+            dangerButton.addEventListener('click', function() {
                 switchSong(ryujiSong);
                 returnButton.style.display = 'block';
+                this.classList.add('clicked');
+                this.textContent = 'Eu avisei...';
             });
 
             // Return to main song button
             returnButton.addEventListener('click', function() {
                 switchSong(mainSong);
                 returnButton.style.display = 'none';
+                dangerButton.classList.remove('clicked');
+                dangerButton.textContent = 'Não aperte';
             });
 
             // Play/Pause button functionality
