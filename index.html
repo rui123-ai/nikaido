@@ -44,7 +44,7 @@
                 <input type="range" id="volumeSlider" min="0" max="100" value="50">
                 <span class="volume-value">50%</span>
             </div>
-            <p class="now-playing">Now Playing: BabyMetal - Megitsune</p>
+            <p class="now-playing">Now Playing: Like a Fire</p>
         </div>
     </div>
 
@@ -512,20 +512,36 @@
             }, 50);
 
             // Audio player functionality
-            const audio = new Audio('music/megitsune.mp3');
+            const audio = new Audio('music/like_a_fire.mp3');
             const playPauseBtn = document.getElementById('playPauseBtn');
             const volumeSlider = document.getElementById('volumeSlider');
             const volumeValue = document.querySelector('.volume-value');
             const playIcon = document.querySelector('.play-icon');
             const pauseIcon = document.querySelector('.pause-icon');
 
+            // Set initial volume
             audio.volume = 0.5;
 
+            // Function to start playing
+            function startPlaying() {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'inline';
+            }
+
+            // Play on first interaction
+            let hasInteracted = false;
+            document.addEventListener('click', function() {
+                if (!hasInteracted) {
+                    startPlaying();
+                    hasInteracted = true;
+                }
+            }, { once: true });
+
+            // Play/Pause button functionality
             playPauseBtn.addEventListener('click', function() {
                 if (audio.paused) {
-                    audio.play();
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'inline';
+                    startPlaying();
                 } else {
                     audio.pause();
                     playIcon.style.display = 'inline';
@@ -533,15 +549,43 @@
                 }
             });
 
+            // Volume control
             volumeSlider.addEventListener('input', function() {
                 const volume = this.value / 100;
                 audio.volume = volume;
                 volumeValue.textContent = this.value + '%';
             });
 
+            // Loop the audio when it ends
             audio.addEventListener('ended', function() {
                 audio.currentTime = 0;
                 audio.play();
+            });
+
+            // Additional interaction triggers
+            document.addEventListener('keydown', function() {
+                if (!hasInteracted) {
+                    startPlaying();
+                    hasInteracted = true;
+                }
+            }, { once: true });
+
+            document.addEventListener('scroll', function() {
+                if (!hasInteracted) {
+                    startPlaying();
+                    hasInteracted = true;
+                }
+            }, { once: true });
+
+            // Prevent audio interruption when changing tabs
+            document.addEventListener('visibilitychange', function() {
+                if (!audio.paused) {
+                    if (document.hidden) {
+                        audio.pause();
+                    } else {
+                        audio.play();
+                    }
+                }
             });
         });
     </script>
